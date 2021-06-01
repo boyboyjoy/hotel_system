@@ -28,7 +28,7 @@ tr:nth-child(even) {
 </head>
 <body>
 <table>
-    <form action="{% url 'discount_card_create' %}" method="POST">
+    <form action="{% url 'index' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_table }}</p>
     <input type="submit" value="Найти">
