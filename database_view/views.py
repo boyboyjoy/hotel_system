@@ -10,6 +10,6 @@ def index(request):
 
 class AvailableRooms(ListView):
     model = RoomModel
-    template_name = 'client/clientmodel_list.html'
+    template_name = 'available_rooms/available_roms.html'
     queryset = RoomModel.objects.all()
 
