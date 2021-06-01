@@ -3,7 +3,7 @@ version: "3"
 services:
   database:
     image: postgres
-    container_name: db
+    container_name: postgres-db
     hostname: postgres
     restart: unless-stopped
     volumes:
@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: django1
+    container_name: server-django
     working_dir: /code/
     command: python manage.py runserver 0.0.0.0:8000
     tty: true
