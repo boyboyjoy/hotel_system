@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a {
+  color: #000 !important;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  height: 70%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <h1 align="center">Поставки</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
+</head>
+<body>
+<p align="right"><a href="{% url 'supply_find' %}">Искать поставки</a></p>
+<table>
+    <form action="{% url 'supply_create' %}" method="POST">
+    {% csrf_token %}
+    <p>{{ create_form.as_table }}</p>
+    <input type="submit" value="Создать">
+</form>
+</table>
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+<br>
+        <table>
+            <tr>
+                <th>Продукт</th>
+                <th>Поставщик</th>
+                <th>Число</th>
+                <th>Дата поставки</th>
+            </tr>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.product_id }}</td>
+                <td>{{ item.provider_id }}</td>
+                <td>{{ item.count}}</td>
+                <td>{{ item.supply_date.date }}</td>
+                <td><a href="{% url 'supply_detail' item.supply_id %}">Обновить</a></td>
+                <td><a href="{% url 'supply_delete' item.supply_id %}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

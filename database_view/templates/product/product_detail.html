@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<table>
+    <form action="{% url 'product_update' object.product_id %}" method="post">
+    {% csrf_token %}
+    {{ update_form.as_table }}
+    <input type="submit" value="Обновить">
+</form>
+</table>
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+<br><br>
+        <table>
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Штрих-код</th>
+                <th>Количество</th>
+            </tr>
+            <tr>
+                <td>{{ object.title }}</td>
+                <td>{{ object.price }}</td>
+                <td>{{ object.vendor_code }}</td>
+                <td>{{ object.count }}</td>
+            </tr>
+        </table>
+    </form>
+<br><br>
+    <a href="{% url 'product_list' %}">назад</a>
+    </body>
+</html>

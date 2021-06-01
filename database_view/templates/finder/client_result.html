@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Результат поиска клиентов</title>
+</head>
+<body>
+<h1 align="center"> Результат поиска клиентов </h1>
+<table>
+    <tr>
+        <th> Фамилия</th>
+        <th> Имя </th>
+        <th> Отчество </th>
+        <th> Телефон </th>
+    </tr>
+    {% for item in list %}
+    <tr>
+        <td> {{ item.surname }}</td>
+        <td> {{ item.name }}</td>
+        <td> {{ item.second_name }}</td>
+        <td> {{ item.phone }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{% url 'client_find' %}"><----Назад</a></p>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Результат поиска клиентов</title>
+</head>
+<body>
+<h1 align="center"> Результат поиска списанных товаров </h1>
+<table>
+    <tr>
+        <th> Наименование</th>
+        <th> Дата </th>
+        <th> Причина </th>
+        <th> Количество</th>
+    </tr>
+    {% for item in list %}
+    <tr>
+        <td> {{ item.product_id }}</td>
+        <td> {{ item.date.date }}</td>
+        <td> {{ item.reason_id }}</td>
+        <td> {{ item.count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{% url 'write_off_product_find' %}"><----Назад</a></p>
+</body>
+</html>

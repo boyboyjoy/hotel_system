@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Результат поиска клиентов</title>
+</head>
+<body>
+<h1 align="center"> Результат поиска продаж </h1>
+<table>
+    <tr>
+        <th> Клиент</th>
+        <th> Сумма </th>
+        <th> Дата </th>
+    </tr>
+    {% for item in list %}
+    <tr>
+        <td> {{ item.client_id }}</td>
+        <td> {{ item.sale_cost }}</td>
+        <td> {{ item.sale_date.date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{% url 'sale_find' %}"><----Назад</a></p>
+</body>
+</html>

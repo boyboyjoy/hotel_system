@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<table>
+    <form action="{% url 'write_off_product_update' object.write_off_product_id %}" method="post">
+    {% csrf_token %}
+    {{ update_form.as_table }}
+    <input type="submit" value="Обновить">
+</form>
+</table>
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+<br><br>
+        <table>
+            <tr>
+                <th>Работник</th>
+                <th>Продукт</th>
+                <th>Причина списания</th>
+                <th>Количество</th>
+                <th>Дата</th>
+            </tr>
+            <tr>
+                <td>{{ object.worker_id }}</td>
+                <td>{{ object.product_id }}</td>
+                <td>{{ object.reason_id }}</td>
+                <td>{{ object.count }}</td>
+                <td>{{ object.date.date }}</td>
+            </tr>
+        </table>
+    </form>
+<br><br>
+    <a href="{% url 'write_off_product_list' %}">назад</a>
+    </body>
+</html>

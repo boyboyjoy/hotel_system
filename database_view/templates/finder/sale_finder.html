@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 align="center">Искать</h1>
+<form align="center" action="{% url 'sale_find' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="искать">
+</form>
+<p><a href="{% url 'sale_list' %}"><----Назад</a></p>
+    </body>
+</html>

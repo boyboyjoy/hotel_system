@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  database:
+    image: postgres
+    container_name: db
+    hostname: postgres
+    restart: unless-stopped
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    tty: true
+    environment:
+      - POSTGRES_DB=Base
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django1
+    working_dir: /code/
+    command: python manage.py runserver 0.0.0.0:8000
+    tty: true
+    volumes:
+      - .:/code/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database

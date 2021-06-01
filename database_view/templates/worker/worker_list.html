@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a {
+  color: #000 !important;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  height: 70%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+a {
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <h1 align="center">Работники</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
+</head>
+<body>
+<p align="right" font-size><a href="{% url 'reports' %}">Отчеты</a></p>
+<p align="right"><a href="{% url 'worker_find' %}">Искать работников</a></p>
+<table>
+    <form action="{% url 'worker_create' %}" method="POST">
+    {% csrf_token %}
+    <p>{{ create_form.as_table }}</p>
+    <input type="submit" value="Создать">
+</form>
+</table>
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+<br>
+        <table>
+            <tr>
+                <th>Должность</th>
+                <th>Отдел</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Контактный телефон</th>
+            </tr>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.position_id }}</td>
+                <td>{{ item.department_id }}</td>
+                <td>{{ item.surname}}</td>
+                <td>{{ item.name}}</td>
+                <td>{{ item.second_name}}</td>
+                <td>{{ item.phone}}</td>
+                <td><a href="{% url 'worker_detail' item.worker_id %}">Обновить</a></td>
+                <td><a href="{% url 'worker_delete' item.worker_id %}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
