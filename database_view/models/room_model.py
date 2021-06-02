@@ -8,6 +8,7 @@ class RoomModel(models.Model):
     room_class_id = models.ForeignKey(RoomClassModel, on_delete=models.CASCADE)
     hotel_id = models.ForeignKey(HotelModel, on_delete=models.CASCADE)
     floor = models.IntegerField(null=False, blank=False)
+    is_booked = models.BooleanField(null=False, blank=False, default=False)
 
     def __str__(self):
         return 'Room'

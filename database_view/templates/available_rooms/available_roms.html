@@ -47,19 +47,14 @@ tr:nth-child(even) {
             </tr>
             {% for item in object_list %}
             <tr>
-                <td>{{ item.surname }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.second_name }}</td>
-                <td>{{ item.phone }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                 <form action="{% url 'client_create' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="submit" value="Забронировать">
-                </form>
-                </td>
+                <th>item.hotel_id.name</th>
+                <th>hello</th>
+                <th>item.room_class_id.name</th>
+                <th>Цена</th>
+                <th>Сеть отелей</th>
+                <th>Этаж</th>
+                <th>Город</th>
+                <th></th>
             </tr>
             {% endfor %}
         </table>

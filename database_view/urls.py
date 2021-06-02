@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import index
-from .views import AvailableRooms, \
+from .views import get_available_rooms, \
     MyServices, \
     personal_area,\
     search_hotels, \
@@ -16,7 +16,7 @@ urlpatterns = [
     path('register/', user_registration, name='register'),
     path('logout/', logout_view, name='logout'),
     path('', index, name='index'),
-    path('availableRooms/', AvailableRooms.as_view(), name='available_rooms'),
+    path('availableRooms/', get_available_rooms, name='available_rooms'),
     path('searchRooms/', search_rooms, name='search_rooms'),
     path('searchHotels/', search_hotels, name='search_hotels'),
     path('services/', get_services, name='services_list'),

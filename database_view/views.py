@@ -54,19 +54,21 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
-class AvailableRooms(ListView):
-    model = RoomModel
-    template_name = 'available_rooms/available_roms.html'
-    queryset = RoomModel.objects.all()
+def get_available_rooms(request):
+    rooms = RoomModel.objects.filter(is_booked=False)
+    return render(request, 'available_rooms/available_roms.html', rooms)
 
 class MyServices(ListView):
     model = ServiceModel
     template_name = 'my_services/my_services_list.html'
-    queryset = ServiceModel.objects.all()
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = ServiceModel.objects.filter(user_id=self.request.user.id)
 
 def personal_area(request):
     if not request.user.is_authenticated:
         return redirect('login')
+
     booking_request = list(BookingModel.objects.filter(user_id=request.user.id))
 
 
@@ -74,12 +76,18 @@ def personal_area(request):
                                                                      'rooms': booking_request})
 
 def search_hotels(request):
+    if not request.user.is_authenticated:
+        redirect('login')
+
     if request.method == 'GET':
         form = HotelsSearchForm(request.GET)
     form = HotelsSearchForm()
     return render(request, 'search_hotels/search_hotels.html', {'form' : form })
 
 def search_rooms(request):
+    if not request.user.is_authenticated:
+        return request('login')
+
     if request.method == 'GET':
         form = RoomsSearchForm(request.GET)
     form = RoomsSearchForm()
@@ -88,12 +96,16 @@ def search_rooms(request):
 def make_review(request, hotel):
     if not request.user.is_authenticated:
         return redirect('login')
+
     if request.method == 'POST':
         form = ReviewForm(request.POST)
     form = ReviewForm()
     return render(request, 'review/make_review.html', {'form' : form })
 
 def get_services(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     services = ServiceClassModel.objects.all()
 
     return render(request, 'services/services_list.html', {'services': services})
