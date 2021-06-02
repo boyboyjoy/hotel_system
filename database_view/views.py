@@ -17,6 +17,8 @@ from database_view.forms import BookingRequestForm
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 
 def index(request):
@@ -193,18 +195,25 @@ def download_pdf(request, room_id):
     buffer = io.BytesIO()
 
 
+
     p = canvas.Canvas(buffer)
+    font_size = 14
+    p.setFont('Times-Roman', font_size)
     p.drawString(250, 810,'Hotel system')
     p.drawString(10, 700, 'Room:')
-    p.drawString(10 + len('Room: '), 700, str(room.room_id))
+    p.drawString(10 + len('Room: ')*font_size/2, 700, str(room.room_id))
     p.drawString(10, 680, 'Floor:')
-    p.drawString(10 + len('Floor: '), 680, str(room.floor))
+    p.drawString(10 + len('Floor: ')*font_size/2, 680, str(room.floor))
     p.drawString(10, 660, 'Room class:')
-    p.drawString(10 + len('Room class: '), 660, str(room.room_class_id.name))
+    p.drawString(10 + len('Room class: ')*font_size/2, 660, str(room.room_class_id.name))
     p.drawString(10, 640, 'Hotel:')
-    p.drawString(10 + len('Hotel: '), 640, str(room.hotel_id.name))
+    p.drawString(10 + len('Hotel: ')*font_size/2, 640, str(room.hotel_id.name))
     p.drawString(10, 620, 'Hotel class:')
-    p.drawString(10 + len('Hotel class: '), 620, str(room.hotel_id.hotel_class_id.name))
+    p.drawString(10 + len('Hotel class: ')*font_size/2, 620, str(room.hotel_id.hotel_class_id.name))
+
+    p.drawString(10, 600, 'Price:')
+    p.drawString(10 + len('Price: ') * font_size / 2, 600,
+                 str(room.room_class_id.price))
     p.line(0, 800, 1000, 800)
 
 
