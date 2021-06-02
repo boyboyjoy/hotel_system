@@ -43,16 +43,18 @@ tr:nth-child(even) {
                 <th>Класс номера</th>
                 <th>Этаж</th>
                 <th>Статус</th>
+                <th></th>
             </tr>
             {% for item in requests %}
             <tr>
-                <th>{{ item.room_id.hotel_id.name }}</th>
-                <th>{{ item.room_id.hotel_id.hotels_chain_id.name }}</th>
-                <th>{{ item.room_id.hotel_id.hotel_class_id.name }}</th>
-                <th>{{ item.room_id.room_class_id.price }}</th>
-                <th>{{ item.room_id.room_class_id.name }}</th>
-                <th>{{ item.room_id.floor }}</th>
-                <th>{{ item.status }}</th>
+                <td>{{ item.room_id.hotel_id.name }}</td>
+                <td>{{ item.room_id.hotel_id.hotels_chain_id.name }}</td>
+                <td>{{ item.room_id.hotel_id.hotel_class_id.name }}</td>
+                <td>{{ item.room_id.room_class_id.price }}</td>
+                <td>{{ item.room_id.room_class_id.name }}</td>
+                <td>{{ item.room_id.floor }}</td>
+                <td>{{ item.status }}</td>
+                <td><a href="{% url 'remove_booking_request' item.booking_request_id %}">Удалить</a></td>
             </tr>
             {% endfor %}
         </table>

@@ -177,3 +177,9 @@ def get_booking_requests(request):
 
     return render(request, 'booking_requests/booking_request.html', {'requests': requests})
 
+def remove_booking_request(request,  booking_id):
+    if not request.user.is_authenticated:
+        return request(request, 'login')
+    BookingRequestModel.objects.get(booking_request_id=booking_id).delete()
+    return redirect('booking_requests')
+
