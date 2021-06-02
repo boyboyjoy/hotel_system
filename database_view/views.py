@@ -115,7 +115,7 @@ def get_review(request, hotel_id):
         return redirect('login')
 
     reviews = ReviewModel.objects.filter(hotel_id=hotel_id)
-    return render(request, 'review/review_list.html', {'reviews':reviews, 'hotel_name': HotelModel.objects.get(hotel_id=hotel_id)})
+    return render(request, 'review/review_list.html', {'reviews':reviews, 'hotel_name': HotelModel.objects.get(hotel_id=hotel_id).name})
 
 def make_service_request(request):
     if not request.user.is_authenticated:
