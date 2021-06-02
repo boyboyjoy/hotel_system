@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a {
+  color: #000 !important;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    height: 70%;
+    border-radius: 10px;
+    border: none !important;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+tr:nth-child(odd) {
+    background-color: #469e7a;
+}
+</style>
+    <h1 align="center">Отзывы о гостинице {{ hotel_name }}</h1>
+    <a href="{% url 'index' %}"> Главное меню </a>
+</head>
+<body>
+
+
+<br>
+        <table>
+            <tr>
+                <th>Заголовок</th>
+                <th>Описание</th>
+                <th>Оценка</th>
+            </tr>
+            {% for item in reviews %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.mark }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

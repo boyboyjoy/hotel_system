@@ -6,3 +6,5 @@ class HotelsSearchForm(Form):
     hotel_chain = ModelChoiceField(label='Сеть гостиниц', queryset=HotelsChainModel.objects.all())
     city = ModelChoiceField(label='Город', queryset=CityModel.objects.all())
 
+
+

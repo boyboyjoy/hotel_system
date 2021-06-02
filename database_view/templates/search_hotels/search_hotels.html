@@ -29,12 +29,12 @@ tr:nth-child(odd) {
     background-color: #469e7a;
 }
 </style>
-    <h1 align="center">Поиск номеров</h1>
+    <h1 align="center">Поиск гостиниц</h1>
     <a href="{% url 'index' %}"> Главное меню </a>
 </head>
 <body>
 <table>
-    <form action="{% url 'index' %}" method="POST">
+    <form action="{% url 'search_hotels' %}" method="POST">
     {% csrf_token %}
     <p>{{ form.as_table }}</p>
     <input type="submit" value="Найти">
@@ -49,16 +49,17 @@ tr:nth-child(odd) {
 <br>
         <table>
             <tr>
-                <th>Класс номера</th>
-                <th>Город</th>
-                <th>Отель</th>
+                <th>Название</th>
+                <th>Класс</th>
+                <th>Сеть отелей</th>
+                <th>Посмотреть отзывы</th>
             </tr>
-            {% for item in object_list %}
+            {% for item in hotels %}
             <tr>
-                <td>{{ item.client_id }}</td>
-                <td>{{ item.discount_value }}</td>
-                <td><a href="{% url 'discount_card_detail' item.card_id %}">Обновить</a></td>
-                <td><a href="{% url 'discount_card_delete' item.card_id %}">Удалить</a></td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.hotel_class_id.name }}</td>
+                <td>{{ item.hotels_chain_id.name }}</td>
+                <td> <a href="{% url 'get_review' item.hotel_id %}">Отзывы</a> </td>
             </tr>
             {% endfor %}
         </table>

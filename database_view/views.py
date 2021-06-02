@@ -9,6 +9,7 @@ from database_view.models.hotel_model import HotelModel
 from database_view.models.booking_model import BookingModel
 from database_view.models.room_model import RoomModel
 from database_view.models.service_model import ServiceModel, ServiceClassModel
+from database_view.models.review_model import ReviewModel
 from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm, LoginForm, UserRegistrationForm, ServiceRequestForm
 
 import io
@@ -82,8 +83,12 @@ def search_hotels(request):
     if not request.user.is_authenticated:
         redirect('login')
 
-    if request.method == 'GET':
-        form = HotelsSearchForm(request.GET)
+    if request.method == 'POST':
+        form = HotelsSearchForm(request.POST)
+        form.is_valid()
+        hotels = HotelModel.objects.filter(hotel_class_id=form.cleaned_data['hotel_class'],
+                                           hotels_chain_id=form.cleaned_data['hotel_chain'])
+        return render(request, 'search_hotels/search_hotels.html', {'form': form, 'hotels': hotels})
     form = HotelsSearchForm()
     return render(request, 'search_hotels/search_hotels.html', {'form' : form })
 
@@ -104,6 +109,13 @@ def make_review(request, hotel):
         form = ReviewForm(request.POST)
     form = ReviewForm()
     return render(request, 'review/make_review.html', {'form' : form })
+
+def get_review(request, hotel_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    reviews = ReviewModel.objects.filter(hotel_id=hotel_id)
+    return render(request, 'review/review_list.html', {'reviews':reviews, 'hotel_name': HotelModel.objects.get(hotel_id=hotel_id)})
 
 def make_service_request(request):
     if not request.user.is_authenticated:
