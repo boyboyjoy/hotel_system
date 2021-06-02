@@ -19,13 +19,20 @@ td, th {
   font-size: 14px;
 }
 
+
+
 tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
     <h1 align="center">Личный кабинет</h1>
-    <a href="{% url 'index' %}"> Главное меню </a>
-    <a href="{% url 'logout' %}"> Выйти из системы </a>
+    <div >
+        <a href="{% url 'index' %}"> Главное меню </a>
+    </div>
+
+    <div>
+        <a href="{% url 'logout' %}"> Выйти из системы </a>
+    </div>
 </head>
 <body>
 <br>
@@ -58,21 +65,21 @@ tr:nth-child(even) {
             <tr>
 
             </tr>
-            {% for item in object_list %}
-            <tr>
-                th>Отель</th>
-                <th>Город</th>
-                <th>Улица</th>
-                <th>Здание</th>
 
-                <th>Номер</th>
-                <th>Этаж</th>
-                <th>Дата заселения</th>
-                <th>Дата выселения</th>
-                <th>Отзыв</th>
-                <td><a href="{% url 'make_review' item.user_id item.hotel_id %}">Оставить отзыв</a></td>
+            <tr>
+                {% for item in rooms %}
+                <th>Отель</th>
+                <td>Улица</td>
+                <td>Здание</td>
+                <td>Номер</td>
+                <td>Этаж</td>
+                <td>Дата заселения</td>
+                <td>Дата выселения</td>
+                <td>Отзыв</td>
+                {% endfor %}
+                <td><a href="{% url 'make_review' user.id %}">Оставить отзыв</a></td>
             </tr>
-            {% endfor %}
+
         </table>
     </body>
 </html>

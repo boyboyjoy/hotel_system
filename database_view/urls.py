@@ -22,6 +22,6 @@ urlpatterns = [
     path('services/', get_services, name='services_list'),
     path('myServices/', get_user_services, name='my_services_list'),
     path('personalArea/', personal_area, name='personal_area'),
-    path('makeReview/<int:user>/<int:hotel>', make_review, name='make_review'),
-    path('bookingRequest/<int:user_id>/<int:room_id>', make_review, name='booking_request')
+    path('makeReview/<int:hotel>', make_review, name='make_review'),
+    path('bookingRequest/<int:room_id>', make_review, name='booking_request')
 ]

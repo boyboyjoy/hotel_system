@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.models.hotel_model import HotelModel
+from database_view.models.booking_model import BookingModel
 from database_view.models.room_model import RoomModel
 from database_view.models.service_model import ServiceModel, ServiceClassModel
 from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm, LoginForm, UserRegistrationForm
@@ -64,7 +65,13 @@ class MyServices(ListView):
     queryset = ServiceModel.objects.all()
 
 def personal_area(request):
-    return render(request, 'personal_area/personal_area_list.html')
+    if not request.user.is_authenticated:
+        return redirect('login')
+    booking_request = list(BookingModel.objects.filter(user_id=request.user.id))
+
+
+    return render(request, 'personal_area/personal_area_list.html', {'user': request.user,
+                                                                     'rooms': booking_request})
 
 def search_hotels(request):
     if request.method == 'GET':
@@ -78,7 +85,9 @@ def search_rooms(request):
     form = RoomsSearchForm()
     return render(request, 'search_rooms/search_rooms.html', {'form' : form })
 
-def make_review(request):
+def make_review(request, hotel):
+    if not request.user.is_authenticated:
+        return redirect('login')
     if request.method == 'POST':
         form = ReviewForm(request.POST)
     form = ReviewForm()
