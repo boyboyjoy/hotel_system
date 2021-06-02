@@ -185,15 +185,27 @@ def remove_booking_request(request,  booking_id):
     BookingRequestModel.objects.get(booking_request_id=booking_id).delete()
     return redirect('booking_requests')
 
-def download_pdf(request):
+def download_pdf(request, room_id):
     if not request.user.is_authenticated:
         return request(request, 'login')
+    room = RoomModel.objects.get(room_id=room_id)
 
     buffer = io.BytesIO()
 
-    p = canvas.Canvas(buffer)
 
-    p.drawString(100, 100, request.user.email)
+    p = canvas.Canvas(buffer)
+    p.drawString(250, 810,'Hotel system')
+    p.drawString(10, 700, 'Room:')
+    p.drawString(10 + len('Room: '), 700, str(room.room_id))
+    p.drawString(10, 680, 'Floor:')
+    p.drawString(10 + len('Floor: '), 680, str(room.floor))
+    p.drawString(10, 660, 'Room class:')
+    p.drawString(10 + len('Room class: '), 660, str(room.room_class_id.name))
+    p.drawString(10, 640, 'Hotel:')
+    p.drawString(10 + len('Hotel: '), 640, str(room.hotel_id.name))
+    p.drawString(10, 620, 'Hotel class:')
+    p.drawString(10 + len('Hotel class: '), 620, str(room.hotel_id.hotel_class_id.name))
+    p.line(0, 800, 1000, 800)
 
 
     p.showPage()
@@ -203,7 +215,7 @@ def download_pdf(request):
         # present the option to save the file.
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True,
-                            filename='data.pdf')
+                            filename='data.pdf', charset='utf-8')
 
 
 

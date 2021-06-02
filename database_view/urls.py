@@ -28,5 +28,5 @@ urlpatterns = [
     path('getReviews/<int:hotel_id>', get_review, name='get_review'),
     path('getBookingRequests', get_booking_requests, name='booking_requests'),
     path('removeBookingRequest/<int:booking_id>', remove_booking_request, name='remove_booking_request'),
-    path('downloafPDF', download_pdf, name='download_pdf')
+    path('downloafPDF/<int:room_id>', download_pdf, name='download_pdf')
 ]

@@ -37,12 +37,6 @@ tr:nth-child(even) {
 <body>
 <br>
 <br>
-<table>
-    <form action="{% url 'download_pdf' %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Скачать информацию в pdf">
-</form>
-</table>
 {% if messages %}
 {% for message in messages %}
 <p>{{ message }}</p>
@@ -57,6 +51,7 @@ tr:nth-child(even) {
                 <th>Дата заселения</th>
                 <th>Дата выселения</th>
                 <th>Отзыв</th>
+                <th></th>
             </tr>
             <tr>
 
@@ -69,8 +64,16 @@ tr:nth-child(even) {
                 <td>{{ item.room_id.floor }}</td>
                 <td>Дата заселения</td>
                 <td>Дата выселения</td>
+                       <td><a href="{% url 'make_review' user.id %}">Оставить отзыв</a></td>
+                    <td>
+                    <form action="{% url 'download_pdf' item.room_id.room_id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Скачать информацию в pdf">
+                    </form>
+                </td>
                 {% endfor %}
-                <td><a href="{% url 'make_review' user.id %}">Оставить отзыв</a></td>
+
+
             </tr>
 
         </table>
