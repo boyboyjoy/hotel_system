@@ -115,6 +115,6 @@ def get_user_services(request):
 
     return render(request, 'my_services/my_services_list.html', {'services': services})
 
-def make_booking(request):
+def make_booking(request, room_id):
     return None
 

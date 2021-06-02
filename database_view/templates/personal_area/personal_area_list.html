@@ -52,10 +52,6 @@ tr:nth-child(even) {
         <table>
             <tr>
                 <th>Отель</th>
-                <th>Город</th>
-                <th>Улица</th>
-                <th>Здание</th>
-
                 <th>Номер</th>
                 <th>Этаж</th>
                 <th>Дата заселения</th>
@@ -68,14 +64,11 @@ tr:nth-child(even) {
 
             <tr>
                 {% for item in rooms %}
-                <th>Отель</th>
-                <td>Улица</td>
-                <td>Здание</td>
-                <td>Номер</td>
-                <td>Этаж</td>
+                <th>{{ item.room_id.hotel_id.name }}</th>
+                <td>{{ item.room_id.room_id }}</td>
+                <td>{{ item.room_id.floor }}</td>
                 <td>Дата заселения</td>
                 <td>Дата выселения</td>
-                <td>Отзыв</td>
                 {% endfor %}
                 <td><a href="{% url 'make_review' user.id %}">Оставить отзыв</a></td>
             </tr>

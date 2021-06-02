@@ -42,8 +42,7 @@ tr:nth-child(even) {
                 <th>Цена</th>
                 <th>Сеть отелей</th>
                 <th>Этаж</th>
-                <th>Город</th>
-                <th></th>
+                <th>Бронирование</th>
             </tr>
             {% for item in rooms %}
             <tr>
@@ -53,8 +52,7 @@ tr:nth-child(even) {
                 <th>{{ item.room_class_id.price }}</th>
                 <th>{{ item.hotel_id.hotels_chain_id.name }}</th>
                 <th>{{ item.floor }}</th>
-                <th></th>
-                <th></th>
+                <th><a href="{% url 'booking_request' item.room_id %}"></a></th>
             </tr>
             {% endfor %}
         </table>
