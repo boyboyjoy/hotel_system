@@ -23,7 +23,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Доступные номера</h1>
+    <h1 align="center">Мои заявки</h1>
     <a href="{% url 'index' %}"> Главное меню </a>
 </head>
 <body>
@@ -37,22 +37,22 @@ tr:nth-child(even) {
         <table>
             <tr>
                 <th>Название отеля</th>
-                <th>Класс отеля</th>
-                <th>Класс номера</th>
-                <th>Цена</th>
                 <th>Сеть отелей</th>
+                <th>Класс отеля</th>
+                <th>Цена</th>
+                <th>Класс номера</th>
                 <th>Этаж</th>
-                <th>Бронирование</th>
+                <th>Статус</th>
             </tr>
-            {% for item in rooms %}
+            {% for item in requests %}
             <tr>
-                <td>{{ item.hotel_id.name }}</td>
-                <td>{{ item.hotel_id.hotel_class_id.name }}</td>
-                <td>{{ item.room_class_id.name }}</td>
-                <td>{{ item.room_class_id.price }}</td>
-                <td>{{ item.hotel_id.hotels_chain_id.name }}</td>
-                <td>{{ item.floor }}</td>
-                <td><a href="{% url 'booking_request' item.room_id%}">Забронировать</a></td>
+                <th>{{ item.room_id.hotel_id.name }}</th>
+                <th>{{ item.room_id.hotel_id.hotels_chain_id.name }}</th>
+                <th>{{ item.room_id.hotel_id.hotel_class_id.name }}</th>
+                <th>{{ item.room_id.room_class_id.price }}</th>
+                <th>{{ item.room_id.room_class_id.name }}</th>
+                <th>{{ item.room_id.floor }}</th>
+                <th>{{ item.status }}</th>
             </tr>
             {% endfor %}
         </table>

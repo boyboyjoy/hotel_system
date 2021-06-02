@@ -23,14 +23,14 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Отзыв</h1>
+    <h1 align="center">Заявка на бронирование</h1>
     <a href="{% url 'index' %}"> Главное меню </a>
 </head>
 <body>
 <br>
 <br>
 <table>
-    <form action="{% url 'make_review' hotel_id %}" method="POST">
+    <form action="{% url 'booking_request' room_id %}" method="POST">
         {% csrf_token %}
         <p>{{ form.as_table }}</p>
         <input type="submit" value="Отправить">

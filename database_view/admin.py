@@ -2,6 +2,9 @@ from django.contrib import admin
 from database_view.models import *
 
 
+
+
+
 admin.site.register(BookingModel)
 admin.site.register(BookingRequestModel)
 admin.site.register(BuildingModel)

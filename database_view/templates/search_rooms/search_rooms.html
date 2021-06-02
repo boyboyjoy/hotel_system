@@ -53,12 +53,14 @@ tr:nth-child(odd) {
                 <th>Гостиница</th>
                 <th>Класс гостиницы</th>
                 <th>Класс номера</th>
+                <th>Бронированине</th>
             </tr>
             {% for item in rooms %}
-                <th>{{ item.hotel_id.hotel_class_id.name }}</th>
-                <th>{{ item.hotel_id.name }}</th>
-                <th>Класс гостиницы</th>
-                <th>{{ item.room_class_id.name }}</th>
+                <td>{{ item.hotel_id.hotel_class_id.name }}</td>
+                <td>{{ item.hotel_id.name }}</td>
+                <td>Класс гостиницы</td>
+                <td>{{ item.room_class_id.name }}</td>
+                <d><a href="{% url 'booking_request' room_id %}">Забронировать</a></d>
             </tr>
             {% endfor %}
         </table>

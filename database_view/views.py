@@ -10,7 +10,9 @@ from database_view.models.booking_model import BookingModel
 from database_view.models.room_model import RoomModel
 from database_view.models.service_model import ServiceModel, ServiceClassModel
 from database_view.models.review_model import ReviewModel
+from database_view.models.booking_request_model import BookingRequestModel
 from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm, LoginForm, UserRegistrationForm, ServiceRequestForm
+from database_view.forms import BookingRequestForm
 
 import io
 from django.http import FileResponse
@@ -119,8 +121,9 @@ def make_review(request, hotel):
         form.is_valid()
         title = form.cleaned_data['title']
         description = form.cleaned_data['description']
-        ReviewModel.objects.create(title=title, description=description, hotel_id=hotel, user_id=request.user, mark=5)
-        return redirect(request, 'index')
+        hotel_inst = HotelModel.objects.get(hotel_id=hotel)
+        ReviewModel.objects.create(title=title, description=description, hotel_id=hotel_inst, user_id=request.user, mark=5)
+        return redirect('index')
     form = ReviewForm()
     return render(request, 'review/make_review.html', {'form' : form, 'hotel_id': hotel})
 
@@ -154,7 +157,23 @@ def get_user_services(request):
     return render(request, 'my_services/my_services_list.html', {'services': services})
 
 def make_booking(request, room_id):
-    return None
+    if not request.user.is_authenticated:
+        return redirect('login')
+    room_inst = RoomModel.objects.get(room_id=room_id)
+    if request.method == 'POST':
+        form = BookingRequestForm(request.POST)
+        form.is_valid()
+        BookingRequestModel.objects.create(user_id=request.user, room_id=room_inst,
+                                           planned_check_in_date=form.cleaned_data['check_in_date'],
+                                           planned_check_out_date=form.cleaned_data['check_out_date'])
+        return redirect('booking_requests')
+    form = BookingRequestForm()
+    return render(request, 'booking_requests/make_booking_request.html', {'form': form, 'room_id':room_id})
 
+def get_booking_requests(request):
+    if not request.user.is_authenticated:
+        return request(request, 'login')
+    requests = BookingRequestModel.objects.filter(user_id=request.user)
 
+    return render(request, 'booking_requests/booking_request.html', {'requests': requests})
 
