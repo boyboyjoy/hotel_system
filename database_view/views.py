@@ -3,8 +3,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.models.room_model import RoomModel
-from database_view.models.service_model import ServiceModel
-from database_view.forms import HotelsSearchForm, RoomsSearchForm
+from database_view.models.service_model import ServiceModel, ServiceClassModel
+from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm
 
 def index(request):
     return render(request, 'menu.html')
@@ -34,4 +34,15 @@ def search_rooms(request):
         form = RoomsSearchForm(request.GET)
     form = RoomsSearchForm()
     return render(request, 'search_rooms/search_rooms.html', {'form' : form })
+
+def make_review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+    form = ReviewForm()
+    return render(request, 'review/make_review.html', {'form' : form })
+
+def get_services(request):
+    services = ServiceClassModel.objects.all()
+
+    return render(request, 'services/services_list.html', {'services': services})
 

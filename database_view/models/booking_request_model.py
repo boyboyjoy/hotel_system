@@ -8,3 +8,7 @@ class BookingRequestModel(models.Model):
     user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     hotel_id = models.ForeignKey(HotelModel, on_delete=models.CASCADE)
     planned_check_in_date = models.DateField()
+
+
+    def __str__(self):
+        return 'BookingRequest'

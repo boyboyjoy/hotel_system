@@ -7,3 +7,6 @@ class HotelModel(models.Model):
     hotels_chain_id = models.ForeignKey(HotelsChainModel, on_delete=models.CASCADE)
     hotel_class_id = models.ForeignKey(HotelClassModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, null=False, blank=False)
+
+    def __str__(self):
+        return 'Hotel'

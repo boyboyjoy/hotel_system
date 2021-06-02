@@ -10,3 +10,6 @@ class ServiceModel(models.Model):
     user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     order_date = models.DateTimeField()
     execution_date = models.DateTimeField()
+
+    def __str__(self):
+        return 'Service'

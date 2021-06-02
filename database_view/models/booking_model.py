@@ -11,3 +11,6 @@ class BookingModel(models.Model):
     user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     check_in_date = models.DateField(null=False, blank=False)
     check_out_date = models.DateField(null=False, blank=False)
+
+    def __str__(self):
+        return 'Booking'
