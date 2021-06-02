@@ -56,7 +56,7 @@ def user_login(request):
 
 def get_available_rooms(request):
     rooms = RoomModel.objects.filter(is_booked=False)
-    return render(request, 'available_rooms/available_roms.html', rooms)
+    return render(request, 'available_rooms/available_roms.html', {'rooms':rooms})
 
 class MyServices(ListView):
     model = ServiceModel

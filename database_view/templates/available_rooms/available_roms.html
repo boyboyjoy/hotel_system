@@ -45,15 +45,15 @@ tr:nth-child(even) {
                 <th>Город</th>
                 <th></th>
             </tr>
-            {% for item in object_list %}
+            {% for item in rooms %}
             <tr>
-                <th>item.hotel_id.name</th>
-                <th>hello</th>
-                <th>item.room_class_id.name</th>
-                <th>Цена</th>
-                <th>Сеть отелей</th>
-                <th>Этаж</th>
-                <th>Город</th>
+                <th>{{ item.hotel_id.name }}</th>
+                <th>{{ item.hotel_id.hotel_class_id.name }}</th>
+                <th>{{ item.room_class_id.name }}</th>
+                <th>{{ item.room_class_id.price }}</th>
+                <th>{{ item.hotel_id.hotels_chain_id.name }}</th>
+                <th>{{ item.floor }}</th>
+                <th></th>
                 <th></th>
             </tr>
             {% endfor %}
