@@ -9,11 +9,12 @@ from .views import AvailableRooms, \
     get_services, \
     user_login, \
     get_user_services, \
-    user_registration
+    user_registration, logout_view
 
 urlpatterns = [
     path('login/', user_login, name='login'),
     path('register/', user_registration, name='register'),
+    path('logout/', logout_view, name='logout'),
     path('', index, name='index'),
     path('availableRooms/', AvailableRooms.as_view(), name='available_rooms'),
     path('searchRooms/', search_rooms, name='search_rooms'),

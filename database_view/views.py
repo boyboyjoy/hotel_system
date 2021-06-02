@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
@@ -11,7 +12,15 @@ from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm, L
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'menu.html')
+
+def logout_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    logout(request)
+    return redirect('login')
 
 
 def user_registration(request):
