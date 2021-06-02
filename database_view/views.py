@@ -123,7 +123,7 @@ def make_review(request, hotel):
         description = form.cleaned_data['description']
         hotel_inst = HotelModel.objects.get(hotel_id=hotel)
         ReviewModel.objects.create(title=title, description=description, hotel_id=hotel_inst, user_id=request.user, mark=5)
-        return redirect('index')
+        return redirect('get_review', hotel)
     form = ReviewForm()
     return render(request, 'review/make_review.html', {'form' : form, 'hotel_id': hotel})
 
