@@ -9,7 +9,10 @@ from database_view.models.hotel_model import HotelModel
 from database_view.models.booking_model import BookingModel
 from database_view.models.room_model import RoomModel
 from database_view.models.service_model import ServiceModel, ServiceClassModel
-from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm, LoginForm, UserRegistrationForm
+from database_view.forms import HotelsSearchForm, RoomsSearchForm, ReviewForm, LoginForm, UserRegistrationForm, ServiceRequestForm
+
+import io
+from django.http import FileResponse
 
 
 def index(request):
@@ -102,6 +105,15 @@ def make_review(request, hotel):
     form = ReviewForm()
     return render(request, 'review/make_review.html', {'form' : form })
 
+def make_service_request(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.method == 'POST':
+        form = ServiceRequestForm(request.POST)
+    form = ServiceRequestForm()
+    return render(request, 'services/service_request.html', {'form' : form })
+
 def get_services(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -117,4 +129,6 @@ def get_user_services(request):
 
 def make_booking(request, room_id):
     return None
+
+
 

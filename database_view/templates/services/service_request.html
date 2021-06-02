@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a {
+  color: #000 !important;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  height: 70%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <h1 align="center">Заявка на услугу</h1>
+    <a href="{% url 'index' %}"> Главное меню </a>
+</head>
+<body>
+<br>
+<br>
+<table>
+    <form action="{% url 'make_service_request' %}" method="POST">
+        {% csrf_token %}
+        <p>{{ form.as_table }}</p>
+        <input type="submit" value="Заказать">
+    </form>
+</table>
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+<br>
+
+    </body>
+</html>

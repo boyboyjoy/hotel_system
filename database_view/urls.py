@@ -9,7 +9,7 @@ from .views import get_available_rooms, \
     get_services, \
     user_login, \
     get_user_services, \
-    user_registration, logout_view, make_booking
+    user_registration, logout_view, make_booking, make_service_request
 
 urlpatterns = [
     path('login/', user_login, name='login'),
@@ -23,5 +23,6 @@ urlpatterns = [
     path('myServices/', get_user_services, name='my_services_list'),
     path('personalArea/', personal_area, name='personal_area'),
     path('makeReview/<int:hotel>', make_review, name='make_review'),
-    path('bookingRequest/<int:room_id>', make_booking, name='booking_request')
+    path('bookingRequest/<int:room_id>', make_booking, name='booking_request'),
+    path('serviceRequest', make_service_request, name='make_service_request')
 ]

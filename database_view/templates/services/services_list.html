@@ -44,15 +44,13 @@ tr:nth-child(odd) {
             <tr>
                 <th>Название услуги</th>
                 <th>Цена услуги</th>
-                <th>Желаемая дата</th>
                 <th>Заказ</th>
             </tr>
             {% for service in services %}
             <tr>
                 <td>{{ service.name }}</td>
                 <td>{{ service.price }}</td>
-                <td> </td>
-                <td></td>
+                <td><a href="{% url 'make_service_request' %}">Заказать</a></td>
             </tr>
             {% endfor %}
         </table>
