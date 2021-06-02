@@ -100,7 +100,13 @@ def search_rooms(request):
         form = RoomsSearchForm(request.POST)
         form.is_valid()
         rooms = RoomModel.objects.filter(room_class_id=form.cleaned_data['room_class'])
-        return render(request, 'search_rooms/search_rooms.html', {'form':form, 'rooms':rooms})
+        new_rooms = []
+        for room in rooms:
+            if room.hotel_id.hotel_class_id == form.cleaned_data['hotel_class'] \
+                and room.hotel_id.hotels_chain_id == form.cleaned_data['hotel_chain']:
+                new_rooms.append(room)
+
+        return render(request, 'search_rooms/search_rooms.html', {'form':form, 'rooms':new_rooms})
     form = RoomsSearchForm()
     return render(request, 'search_rooms/search_rooms.html', {'form' : form })
 
