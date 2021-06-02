@@ -45,16 +45,10 @@ tr:nth-child(even) {
             <tr>
                 <th>Класс номера</th>
                 <th>Город</th>
-                <th>Отель</th>
+                <th>Гостиница</th>
+                <th>Класс гостиницы</th>
+                <th>Улица</th>
             </tr>
-            {% for item in object_list %}
-            <tr>
-                <td>{{ item.client_id }}</td>
-                <td>{{ item.discount_value }}</td>
-                <td><a href="{% url 'discount_card_detail' item.card_id %}">Обновить</a></td>
-                <td><a href="{% url 'discount_card_delete' item.card_id %}">Удалить</a></td>
-            </tr>
-            {% endfor %}
         </table>
     </body>
 </html>
