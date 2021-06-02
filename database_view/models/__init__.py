@@ -1,6 +1,5 @@
 from .booking_model import BookingModel
 from .booking_request_model import BookingRequestModel
-from .building_model import BuildingModel
 from .city_model import CityModel
 from .employee_model import EmployeeModel
 from .function_model import FunctionModel
@@ -14,3 +13,4 @@ from .service_class_model import ServiceClassModel
 from .service_model import ServiceModel
 from .street_model import StreetModel
 from .user_model import UserModel
+from .building_model import BuildingModel

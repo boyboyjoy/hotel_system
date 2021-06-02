@@ -52,14 +52,24 @@ tr:nth-child(even) {
                 <th>Этаж</th>
                 <th>Дата заселения</th>
                 <th>Дата выселения</th>
+                <th>Отзыв</th>
+            </tr>
+            <tr>
+
             </tr>
             {% for item in object_list %}
             <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.phone }}</td>
-                <td>{{ item.contract_expire.date}}</td>
-                <td><a href="{% url 'provider_detail' item.provider_id %}">Обновить</a></td>
-                <td><a href="{% url 'provider_delete' item.provider_id %}">Удалить</a></td>
+                th>Отель</th>
+                <th>Город</th>
+                <th>Улица</th>
+                <th>Здание</th>
+
+                <th>Номер</th>
+                <th>Этаж</th>
+                <th>Дата заселения</th>
+                <th>Дата выселения</th>
+                <th>Отзыв</th>
+                <td><a href="{% url 'make_review' item.user_id item.hotel_id %}">Оставить отзыв</a></td>
             </tr>
             {% endfor %}
         </table>

@@ -47,12 +47,12 @@ tr:nth-child(odd) {
                 <th>Статус</th>
                 <th>Номер</th>
             </tr>
-            {% for item in object_list %}
+            {% for service in services %}
             <tr>
-                <td>{{ item.surname }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.second_name }}</td>
-                <td>{{ item.phone }}</td>
+                <td>{{ service.serice_class.name }}</td>
+                <td>{{ service.execution_date}}</td>
+                <td>{{ service.employee.first_name }}</td>
+                <td>{{ service.room.room_id }}</td>
             </tr>
             {% endfor %}
         </table>
