@@ -34,7 +34,7 @@ tr:nth-child(odd) {
 </head>
 <body>
 <table>
-    <form action="{% url 'index' %}" method="POST">
+    <form action="{% url 'search_rooms' %}" method="POST">
     {% csrf_token %}
     <p>{{ form.as_table }}</p>
     <input type="submit" value="Найти">
@@ -49,12 +49,18 @@ tr:nth-child(odd) {
 <br>
         <table>
             <tr>
-                <th>Класс номера</th>
-                <th>Город</th>
+                <th>Класс гостиницы</th>
                 <th>Гостиница</th>
                 <th>Класс гостиницы</th>
-                <th>Улица</th>
+                <th>Класс номера</th>
             </tr>
+            {% for item in rooms %}
+                <th>{{ item.hotel_id.hotel_class_id.name }}</th>
+                <th>{{ item.hotel_id.name }}</th>
+                <th>Класс гостиницы</th>
+                <th>{{ item.room_class_id.name }}</th>
+            </tr>
+            {% endfor %}
         </table>
     </body>
 </html>

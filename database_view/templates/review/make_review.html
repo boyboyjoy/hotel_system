@@ -30,7 +30,7 @@ tr:nth-child(even) {
 <br>
 <br>
 <table>
-    <form action="{% url 'index' %}" method="POST">
+    <form action="{% url 'make_review' hotel %}" method="POST">
         {% csrf_token %}
         <p>{{ form.as_table }}</p>
         <input type="submit" value="Отправить">

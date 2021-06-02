@@ -96,8 +96,11 @@ def search_rooms(request):
     if not request.user.is_authenticated:
         return request('login')
 
-    if request.method == 'GET':
-        form = RoomsSearchForm(request.GET)
+    if request.method == 'POST':
+        form = RoomsSearchForm(request.POST)
+        form.is_valid()
+        rooms = RoomModel.objects.filter(room_class_id=form.cleaned_data['room_class'])
+        return render(request, 'search_rooms/search_rooms.html', {'form':form, 'rooms':rooms})
     form = RoomsSearchForm()
     return render(request, 'search_rooms/search_rooms.html', {'form' : form })
 
@@ -107,8 +110,13 @@ def make_review(request, hotel):
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
+        form.is_valid()
+        title = form.cleaned_data['title']
+        description = form.cleaned_data['description']
+        ReviewModel.objects.create(title=title, description=description, hotel_id=hotel, user_id=request.user, mark=5)
+        return redirect(request, 'index')
     form = ReviewForm()
-    return render(request, 'review/make_review.html', {'form' : form })
+    return render(request, 'review/make_review.html', {'form' : form, 'hotel_id': hotel})
 
 def get_review(request, hotel_id):
     if not request.user.is_authenticated:

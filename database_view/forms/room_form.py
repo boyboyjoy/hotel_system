@@ -1,4 +1,4 @@
-from django.forms import Form, CharField, DateTimeField, DateTimeInput, ModelChoiceField
+from django.forms import ModelForm, Form, CharField, DateTimeField, DateTimeInput, ModelChoiceField
 from database_view.models import HotelModel, HotelClassModel, HotelsChainModel, CityModel, RoomClassModel
 
 class RoomsSearchForm(Form):
@@ -6,3 +6,4 @@ class RoomsSearchForm(Form):
     hotel_chain = ModelChoiceField(label='Сеть гостиниц', queryset=HotelsChainModel.objects.all())
     city = ModelChoiceField(label='Город', queryset=CityModel.objects.all())
     room_class = ModelChoiceField(label='Класс номера', queryset=RoomClassModel.objects.all())
+
