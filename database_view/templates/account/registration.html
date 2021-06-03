@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Вход</title>
-
+    <title>Регистрация</title>
+<style>
+    a {
+    color: #000 !important;
+    }
+</style>
 </head>
 <body>
 <div id="header">
     <span class="logo">Гостиница</span>
 </div>
+<a href="{% url 'login' %}">Войти</a>
 <div id="content">
       <h1>Регистрация</h1>
     <form action="." method="post">
