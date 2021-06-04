@@ -8,4 +8,8 @@ class BuildingModel(models.Model):
     street_id = models.ForeignKey(StreetModel, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.building_number
+        return str(self.building_number)
+
+    class Meta:
+        verbose_name = 'Здания'
+        verbose_name_plural = 'Здания'

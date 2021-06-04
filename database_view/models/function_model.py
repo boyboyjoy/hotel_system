@@ -8,3 +8,7 @@ class FunctionModel(models.Model):
 
     def __str__(self):
         return self.function_name
+
+    class Meta:
+        verbose_name = 'Должности'
+        verbose_name_plural = 'Должности'

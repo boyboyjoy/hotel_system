@@ -11,4 +11,8 @@ class   HotelModel(models.Model):
     buildings = models.ManyToManyField(BuildingModel)
 
     def __str__(self):
-        return 'Hotel'
+        return self.name
+
+    class Meta:
+        verbose_name = 'Гостиницы'
+        verbose_name_plural = 'Гостиницы'

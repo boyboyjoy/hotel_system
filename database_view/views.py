@@ -39,6 +39,7 @@ def user_registration(request):
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
+            user_form.cleaned_data['username'] = user_form.cleaned_data['email']
             new_user.save()
             return redirect('index')
     else:
@@ -50,7 +51,7 @@ def user_login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(username=cd['email'], password=cd['password'])
+            user = authenticate(email=cd['email'], password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -113,7 +114,7 @@ def search_rooms(request):
 
         return render(request, 'search_rooms/search_rooms.html', {'form':form, 'rooms':new_rooms})
     form = RoomsSearchForm()
-    return render(request, 'search_rooms/search_rooms.html', {'form' : form })
+    return render(request, 'search_rooms/search_rooms.html', {'form' : form})
 
 def make_review(request, hotel):
     if not request.user.is_authenticated:
@@ -148,17 +149,19 @@ def make_service_request(request):
     return render(request, 'services/service_request.html', {'form' : form })
 
 def get_services(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+
 
     services = ServiceClassModel.objects.all()
 
     return render(request, 'services/services_list.html', {'services': services})
 
 def get_user_services(request):
-    services = ServiceModel.objects.all()
+    if not request.user.is_authenticated:
+        return redirect('login')
 
-    return render(request, 'my_services/my_services_list.html', {'services': services})
+    services = ServiceModel.objects.filter(user_id=request.user.id)
+
+    return render(request, 'my_services/my_services_list.html', {'services': services, 'user': request.user})
 
 def make_booking(request, room_id):
     if not request.user.is_authenticated:

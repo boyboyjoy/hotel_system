@@ -13,4 +13,8 @@ class EmployeeModel(models.Model):
 
 
     def __str__(self):
-        return 'Employee'
+        return self.second_name + ' ' + self.first_name + ' ' + self.patronymic + ' ' + self.function_id.function_name
+
+    class Meta:
+        verbose_name = 'Сотрудники'
+        verbose_name_plural = 'Сотрудники'

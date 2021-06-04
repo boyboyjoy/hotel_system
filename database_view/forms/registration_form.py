@@ -1,15 +1,15 @@
 from django import forms
-from django.contrib.auth.models import User
+from database_view.models import MyUser
 
 class UserRegistrationForm(forms.ModelForm):
     password =  forms.CharField(label='Пароль', widget=forms.PasswordInput)
     password_confirmation = forms.CharField(label='Пароль ещё раз', widget=forms.PasswordInput)
 
     class Meta:
-        model = User
-        fields = ('email', 'first_name', 'last_name')
+        model = MyUser
+        fields = ('email', 'first_name', 'last_name', 'patronymic')
         labels = {
-            'email': 'Email', 'first_name':'Имя', 'last_name':'Фамилия'
+            'email': 'Email', 'first_name':'Имя', 'last_name':'Фамилия', 'patronymic':'Отчество'
         }
 
     def clean_password_confirmation(self):

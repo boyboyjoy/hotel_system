@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from .my_user import MyUser
 import datetime
 
 from database_view.models.hotel_model import HotelModel
@@ -7,7 +7,7 @@ from database_view.models.room_model import RoomModel
 
 class BookingRequestModel(models.Model):
     booking_request_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     room_id = models.ForeignKey(RoomModel, on_delete=models.CASCADE)
     planned_check_in_date = models.DateField()
     planned_check_out_date = models.DateField(default=datetime.date.today())
@@ -16,3 +16,7 @@ class BookingRequestModel(models.Model):
 
     def __str__(self):
         return 'BookingRequest'
+
+    class Meta:
+        verbose_name = 'Заявки на бронирование'
+        verbose_name_plural = 'Заявки на бронирование'

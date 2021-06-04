@@ -8,3 +8,7 @@ class StreetModel(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Улицы'
+        verbose_name_plural = 'Улицы'

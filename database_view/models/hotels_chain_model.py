@@ -7,3 +7,8 @@ class HotelsChainModel(models.Model):
 
     def __str__(self):
         return self.name
+
+
+    class Meta:
+        verbose_name = 'Сети гостиниц'
+        verbose_name_plural = 'Сети гостиниц'

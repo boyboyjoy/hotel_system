@@ -1,3 +1,4 @@
+from .my_user import MyUser
 from .booking_model import BookingModel
 from .booking_request_model import BookingRequestModel
 from .city_model import CityModel
@@ -12,5 +13,4 @@ from .room_model import RoomModel
 from .service_class_model import ServiceClassModel
 from .service_model import ServiceModel
 from .street_model import StreetModel
-from .user_model import UserModel
 from .building_model import BuildingModel

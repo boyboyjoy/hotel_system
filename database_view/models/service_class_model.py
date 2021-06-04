@@ -9,3 +9,7 @@ class ServiceClassModel(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Виды услуг'
+        verbose_name_plural = 'Виды услуг'

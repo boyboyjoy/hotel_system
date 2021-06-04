@@ -2,31 +2,29 @@
 <html>
 <head>
 <style>
-a {
-  color: #000 !important;
-}
 table {
     font-family: arial, sans-serif;
-    border-collapse: collapse;
+    background-color: aqua;
     width: 100%;
-    height: 70%;
-    border-radius: 10px;
-    border: none !important;
+    border-collapse:separate;
+
+    border-radius:6px;
+    -moz-border-radius:6px;
 }
 
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    font-size: 14px;
+    text-align: center;
+    padding: 14px;
+    font-size: 12px;
+    border-left:solid black 1px;
+    border-top:solid black 1px;
     border-radius: 10px;
 }
 
+
 tr:nth-child(even) {
-    background-color: #dddddd;
-}
-tr:nth-child(odd) {
-    background-color: #469e7a;
+  background-color: #3c896D;
 }
 </style>
     <h1 align="center">Мои услуги</h1>
@@ -43,14 +41,20 @@ tr:nth-child(odd) {
         <table>
             <tr>
                 <th>Название услуги</th>
-                <th>Дата заказа</th>
-                <th>Дата исполнения</th>
+                <th>Стоимость</th>
+                <th>Дата</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
             </tr>
             {% for service in services %}
             <tr>
                 <td>{{ service.service_class_id.name }}</td>
-                <td>{{ service.order_date }}</td>
+                <td>{{ service.service_class_id.price }}</td>
                 <td>{{ service.execution_date }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.patronymic }}</td>
             </tr>
             {% endfor %}
         </table>
